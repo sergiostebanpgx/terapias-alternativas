@@ -1,0 +1,100 @@
+.custom-input-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.input-wrapper:focus-within {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.input-icon {
+  margin-left: 14px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.input-wrapper:focus-within .input-icon {
+  color: var(--primary);
+}
+
+.custom-input-field {
+  width: 100%;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.custom-input-field:focus {
+  outline: none;
+}
+
+/* Remove native number input spin buttons to preserve custom UI style */
+.custom-input-field[type="number"]::-webkit-outer-spin-button,
+.custom-input-field[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-input-field[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.has-error {
+  border-color: var(--error) !important;
+}
+
+.input-error-msg {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--error);
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 639px) {
+  .custom-input-field {
+    font-size: 16px;
+  }
+  
+  .input-wrapper:focus-within {
+    transform: none;
+  }
+  
+  .input-wrapper {
+    min-height: var(--touch-target-min);
+  }
+  
+  .custom-input-group {
+    margin-bottom: var(--space-md);
+  }
+}

@@ -1,0 +1,13 @@
+.number-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.number-input-suffix {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+}

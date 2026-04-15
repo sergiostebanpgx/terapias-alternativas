@@ -1,0 +1,106 @@
+/* Payments page specific styles */
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.category-badge--control {
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.category-badge--product {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.category-badge--abono {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid currentColor;
+}
+
+.status-badge--scheduled {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.status-badge--completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.status-badge--cancelled {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+/* Modal info boxes */
+.info-box {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.info-box--success {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.info-box strong {
+  color: white;
+}
+
+/* Table cell utilities */
+.table-cell-amount {
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.table-cell-muted {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.table-actions {
+  display: flex;
+  gap: var(--space-xs);
+  justify-content: center;
+}
+
+@media (max-width: 639px) {
+  .category-badge,
+  .status-badge {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  
+  .info-box {
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+  }
+}
