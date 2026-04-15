@@ -1,0 +1,234 @@
+/* ===== TIME RANGE PICKER - DARK MODE ===== */
+.timerange-group {
+  margin-bottom: var(--space-lg);
+  width: 100%;
+}
+
+.timerange-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.timerange-required {
+  color: var(--error);
+  margin-left: 4px;
+}
+
+.timerange-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: var(--touch-target-min);
+}
+
+.timerange-trigger:hover:not(:disabled) {
+  border-color: var(--border-strong);
+}
+
+.timerange-trigger:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-muted);
+}
+
+.timerange-trigger.has-error {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.timerange-trigger.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timerange-trigger-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.timerange-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.timerange-trigger:focus .timerange-icon {
+  color: var(--primary);
+}
+
+.timerange-times {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.timerange-times .is-placeholder {
+  color: var(--text-muted);
+}
+
+.timerange-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.timerange-chevron {
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.timerange-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.timerange-dropdown {
+  width: 280px;
+  padding: 0 !important;
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+  overflow: hidden;
+}
+
+/* Tabs */
+.timerange-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.timerange-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.timerange-tab:first-child {
+  border-right: 1px solid var(--border-subtle);
+}
+
+.timerange-tab:hover {
+  background: var(--bg-surface);
+}
+
+.timerange-tab.is-active {
+  border-bottom-color: var(--primary);
+  background: var(--primary-muted);
+}
+
+.timerange-tab-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.timerange-tab.is-active .timerange-tab-label {
+  color: var(--primary);
+}
+
+.timerange-tab-value {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timerange-tab.is-active .timerange-tab-value {
+  color: var(--primary);
+}
+
+/* List */
+.timerange-list {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: var(--space-xs);
+}
+
+.timerange-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.timerange-option:hover {
+  background: var(--bg-surface);
+}
+
+.timerange-option.is-selected {
+  background: var(--primary-muted);
+  color: var(--primary);
+}
+
+.timerange-option-label {
+  font-weight: 500;
+}
+
+.timerange-option-value {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.timerange-option.is-selected .timerange-option-value {
+  color: var(--primary);
+  opacity: 0.7;
+}
+
+.timerange-error {
+  display: block;
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  color: var(--error);
+  font-weight: 500;
+}
+
+/* Scrollbar styling */
+.timerange-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.timerange-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.timerange-list::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--radius-full);
+}
+
+.timerange-list::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}

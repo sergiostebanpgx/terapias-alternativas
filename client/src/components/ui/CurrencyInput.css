@@ -1,0 +1,120 @@
+/* ===== CURRENCY INPUT - DARK MODE ===== */
+.currency-input-group {
+  margin-bottom: var(--space-lg);
+  width: 100%;
+}
+
+.currency-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.currency-required {
+  color: var(--error);
+  margin-left: 4px;
+}
+
+.currency-wrapper {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.currency-wrapper:hover:not(.is-disabled):not(.is-focused) {
+  border-color: var(--border-strong);
+}
+
+.currency-wrapper.is-focused {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-muted);
+}
+
+.currency-wrapper.has-error {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.currency-wrapper.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.currency-prefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  background: rgba(20, 184, 166, 0.1);
+  border-right: 1px solid var(--border-default);
+  color: var(--primary);
+  height: 100%;
+  min-height: 46px;
+}
+
+.currency-wrapper.is-focused .currency-prefix {
+  background: rgba(20, 184, 166, 0.15);
+  color: var(--primary);
+}
+
+.currency-field {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.currency-field::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.currency-field:focus {
+  outline: none;
+}
+
+.currency-suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  background: var(--bg-hover);
+  border-left: 1px solid var(--border-default);
+  height: 100%;
+  min-height: 46px;
+}
+
+.currency-suffix span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.currency-error {
+  display: block;
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  color: var(--error);
+  font-weight: 500;
+}
+
+/* Mobile */
+@media (max-width: 639px) {
+  .currency-field {
+    font-size: 16px;
+    padding: 14px 12px;
+  }
+}
