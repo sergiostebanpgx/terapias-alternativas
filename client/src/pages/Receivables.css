@@ -1,70 +1,84 @@
+/* ===== RECEIVABLES PAGE - DARK MODE ===== */
+
+/* Summary Grid */
 .receivables-summary-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .receivables-summary-card {
-  padding: 16px;
-  border-radius: 16px;
+  padding: var(--space-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
 }
 
 .receivables-summary-card span {
   display: block;
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  margin-bottom: var(--space-sm);
 }
 
 .receivables-summary-card strong {
-  font-size: 1.35rem;
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--text-primary);
 }
 
+/* Filters */
 .receivables-filters {
-  padding: 16px;
-  border-radius: 16px;
+  padding: var(--space-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .receivables-filter-field {
   min-width: 0;
 }
 
+/* Status Badges */
 .receivables-status {
   display: inline-flex;
   align-items: center;
   padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.78rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .receivables-status.pending {
   background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.32);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .receivables-status.partial {
-  background: rgba(59, 130, 246, 0.16);
-  color: #60a5fa;
-  border: 1px solid rgba(96, 165, 250, 0.35);
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--info);
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .receivables-status.paid {
-  background: rgba(16, 185, 129, 0.16);
-  color: #34d399;
-  border: 1px solid rgba(52, 211, 153, 0.35);
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
+/* Modal Actions */
 .receivables-modal-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 18px;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
 }
 
 .receivables-modal-actions .btn-primary {
@@ -72,42 +86,47 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .receivables-cancel {
-  background: var(--surface);
+  background: var(--bg-surface);
 }
 
+/* Abono Info */
 .receivables-abono-info {
-  margin-bottom: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.24);
+  margin-bottom: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 .receivables-abono-info p {
   margin-bottom: 4px;
   color: var(--text-secondary);
-  font-size: 0.86rem;
+  font-size: 0.875rem;
 }
 
 .receivables-abono-info p:last-child {
   margin-bottom: 0;
 }
 
+/* Locked State */
 .receivables-locked {
-  padding: 24px;
-  border-radius: 18px;
+  padding: var(--space-xl);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   display: grid;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .receivables-locked p {
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
+/* Responsive */
 @media (max-width: 1023px) {
   .receivables-summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -121,5 +140,9 @@
 @media (max-width: 639px) {
   .receivables-summary-grid {
     grid-template-columns: 1fr;
+  }
+
+  .receivables-modal-actions {
+    flex-direction: column;
   }
 }

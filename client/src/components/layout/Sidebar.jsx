@@ -11,12 +11,10 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight,
-  ShieldCheck,
-  BriefcaseBusiness,
-  Workflow,
-  Sparkles,
   Stethoscope,
   HandCoins,
+  X,
+  Leaf,
 } from "lucide-react";
 import { useAuth } from "../../AuthContext";
 import "./Sidebar.css";
@@ -37,149 +35,131 @@ export default function Sidebar() {
     localStorage.setItem("sidebar-collapsed", JSON.stringify(newVal));
   };
 
-  const navGroups = [
-    {
-      key: "gestion",
-      title: "Gestión",
-      icon: BriefcaseBusiness,
-      items: [
-        { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-        { path: "/patients", label: "Pacientes", icon: Users },
-        { path: "/weights", label: "Control Peso", icon: Scale },
-      ],
-    },
-    {
-      key: "operaciones",
-      title: "Operaciones",
-      icon: Workflow,
-      items: [
-        { path: "/inventory", label: "Inventario", icon: Package },
-        { path: "/doctors", label: "Doctoras", icon: Stethoscope },
-        { path: "/payments", label: "Pagos", icon: CreditCard },
-        ...(isAdmin
-          ? [{ path: "/receivables", label: "CxC", icon: HandCoins }]
-          : []),
-        { path: "/appointments", label: "Citas", icon: Calendar },
-      ],
-    },
+  const navItems = [
+    { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { path: "/patients", label: "Pacientes", icon: Users },
+    { path: "/weights", label: "Control Peso", icon: Scale },
+    { path: "/inventory", label: "Inventario", icon: Package },
+    { path: "/doctors", label: "Doctoras", icon: Stethoscope },
+    { path: "/payments", label: "Pagos", icon: CreditCard },
+    ...(isAdmin ? [{ path: "/receivables", label: "CxC", icon: HandCoins }] : []),
+    { path: "/appointments", label: "Citas", icon: Calendar },
   ];
 
   const userName = user?.name || "Usuario";
   const userInitial = userName[0]?.toUpperCase() || "U";
-  const userEmail = user?.email || "usuario@alternativas.app";
   const userRole = user?.role || "Administrador";
 
   return (
     <>
-      <button className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
-        <Menu size={24} />
-      </button>
+      {/* Mobile Header */}
+      <header className="mobile-header">
+        <button 
+          className="mobile-menu-btn" 
+          onClick={() => setIsOpen(true)}
+          aria-label="Abrir menu"
+        >
+          <Menu size={22} />
+        </button>
+        <div className="mobile-logo">
+          <Leaf size={20} />
+          <span>Alternativas</span>
+        </div>
+      </header>
 
+      {/* Sidebar */}
       <aside
-        className={`sidebar glass-panel ${isOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`}
+        className={`sidebar ${isOpen ? "open" : ""} ${isCollapsed ? "collapsed" : ""}`}
       >
+        {/* Header */}
         <div className="sidebar-header">
-          <div className="logo-container">
+          <Link to="/dashboard" className="logo-link">
             <div className="logo-icon">
-              <ShieldCheck size={28} color="var(--primary)" />
+              <Leaf size={24} />
             </div>
             {!isCollapsed && (
-              <div>
-                <h2 className="logo-text">Alternativas</h2>
-                <p className="logo-subtitle">Panel Clínico</p>
+              <div className="logo-text">
+                <span className="logo-title">Alternativas</span>
+                <span className="logo-subtitle">Panel Clinico</span>
               </div>
             )}
-          </div>
-          <button className="collapse-btn" onClick={toggleCollapsed}>
-            {isCollapsed ? (
-              <ChevronRight size={18} />
-            ) : (
-              <ChevronLeft size={18} />
-            )}
+          </Link>
+          
+          <button 
+            className="collapse-btn desktop-only" 
+            onClick={toggleCollapsed}
+            aria-label={isCollapsed ? "Expandir sidebar" : "Colapsar sidebar"}
+          >
+            {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          </button>
+          
+          <button 
+            className="close-btn mobile-only" 
+            onClick={() => setIsOpen(false)}
+            aria-label="Cerrar menu"
+          >
+            <X size={20} />
           </button>
         </div>
 
-        <div className="user-profile">
-          <div className="avatar">{userInitial}</div>
+        {/* User Profile */}
+        <div className="user-card">
+          <div className="user-avatar">
+            {userInitial}
+          </div>
           {!isCollapsed && (
             <div className="user-info">
-              <p className="user-name">{userName}</p>
-              <p className="user-role">{userRole}</p>
-              <p className="user-email">{userEmail}</p>
-            </div>
-          )}
-          {!isCollapsed && (
-            <div className="user-presence" title="Sesión activa">
-              <Sparkles size={13} />
+              <span className="user-name">{userName}</span>
+              <span className="user-role">{userRole}</span>
             </div>
           )}
         </div>
 
+        {/* Navigation */}
         <nav className="sidebar-nav">
-          {navGroups.map((group) => {
-            const GroupIcon = group.icon;
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path || 
+              (item.path !== "/dashboard" && location.pathname.startsWith(item.path));
+            
             return (
-              <div key={group.key} className="nav-group">
-                {!isCollapsed && (
-                  <p className="nav-group-title">
-                    <GroupIcon size={13} />
-                    {group.title}
-                  </p>
-                )}
-                <div className="nav-group-items">
-                  {group.items.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = location.pathname.startsWith(item.path);
-                    return (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        className={`nav-item ${isActive ? "active" : ""}`}
-                        onClick={() => setIsOpen(false)}
-                        title={isCollapsed ? item.label : ""}
-                      >
-                        <span className="nav-icon">
-                          <Icon size={20} />
-                        </span>
-                        {!isCollapsed && (
-                          <span className="nav-label">{item.label}</span>
-                        )}
-                        {isActive && <div className="active-dot" />}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`nav-link ${isActive ? "active" : ""}`}
+                onClick={() => setIsOpen(false)}
+                title={isCollapsed ? item.label : undefined}
+              >
+                <span className="nav-icon">
+                  <Icon size={20} />
+                </span>
+                {!isCollapsed && <span className="nav-label">{item.label}</span>}
+                {isActive && <span className="nav-indicator" />}
+              </Link>
             );
           })}
         </nav>
 
+        {/* Footer */}
         <div className="sidebar-footer">
           <button
             onClick={logout}
-            className="btn-logout"
-            title={isCollapsed ? "Cerrar Sesión" : ""}
+            className="logout-btn"
+            title={isCollapsed ? "Cerrar Sesion" : undefined}
           >
             <LogOut size={18} />
-            {!isCollapsed && <span>Cerrar Sesión</span>}
+            {!isCollapsed && <span>Cerrar Sesion</span>}
           </button>
         </div>
       </aside>
 
+      {/* Overlay */}
       {isOpen && (
         <div
           className="sidebar-overlay"
-          role="button"
-          tabIndex={0}
-          aria-label="Cerrar menú lateral"
           onClick={() => setIsOpen(false)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setIsOpen(false);
-            }
-          }}
-        ></div>
+          aria-hidden="true"
+        />
       )}
     </>
   );

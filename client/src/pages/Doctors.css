@@ -1,8 +1,10 @@
+/* ===== DOCTORS SCHEDULE - DARK MODE ===== */
+
 .doctor-schedule-modal {
   width: min(920px, 96vw);
   max-width: min(920px, 96vw);
   max-height: calc(100vh - 40px);
-  padding: 20px;
+  padding: var(--space-lg);
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
@@ -12,46 +14,41 @@
 .doctor-schedule-title {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .doctor-schedule-subtitle {
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  font-size: 0.875rem;
 }
 
 .doctor-schedule-grid {
   display: grid;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .doctor-schedule-head {
   display: grid;
-  grid-template-columns: minmax(90px, 130px) max-content minmax(0, 1fr) minmax(
-      0,
-      1fr
-    );
-  gap: 10px;
-  padding: 0 8px 2px;
-  color: var(--text-secondary);
-  font-size: 0.76rem;
-  letter-spacing: 0.02em;
+  grid-template-columns: minmax(90px, 130px) max-content minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-sm);
+  padding: 0 var(--space-sm) 2px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .doctor-schedule-row {
   display: grid;
-  grid-template-columns: minmax(90px, 130px) max-content minmax(0, 1fr) minmax(
-      0,
-      1fr
-    );
-  gap: 10px;
+  grid-template-columns: minmax(90px, 130px) max-content minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-sm);
   align-items: end;
-  padding: 10px;
-  background: rgba(10, 16, 30, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  padding: var(--space-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
   min-width: 0;
 }
 
@@ -59,6 +56,7 @@
   display: block;
   color: var(--text-primary);
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .doctor-schedule-toggle {
@@ -66,7 +64,7 @@
   align-items: center;
   gap: 6px;
   color: var(--text-secondary);
-  font-size: 0.84rem;
+  font-size: 0.8125rem;
   white-space: nowrap;
 }
 
@@ -77,8 +75,8 @@
 }
 
 .doctor-schedule-mobile-label {
-  color: var(--text-secondary);
-  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
   display: none;
 }
 
@@ -86,41 +84,43 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  padding: 9px 11px;
-  background: rgba(12, 18, 32, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font: inherit;
-  font-size: 0.92rem;
+  font-size: 0.9375rem;
+  transition: all var(--transition-fast);
 }
 
 .doctor-schedule-time-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 0 3px var(--primary-muted);
 }
 
 .doctor-schedule-time-input:disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .doctor-schedule-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
 }
 
 .doctor-schedule-error {
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  border-radius: 8px;
-  background: rgba(127, 29, 29, 0.25);
-  color: #fecaca;
-  padding: 8px 10px;
-  font-size: 0.82rem;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.8125rem;
 }
 
+/* Tablet */
 @media (max-width: 1023px) {
   .doctor-schedule-head {
     display: none;
@@ -140,11 +140,12 @@
   }
 }
 
+/* Mobile */
 @media (max-width: 639px) {
   .doctor-schedule-modal {
     width: min(96vw, 96vw);
     max-height: calc(100vh - 20px);
-    padding: 14px;
+    padding: var(--space-md);
   }
 
   .doctor-schedule-row {

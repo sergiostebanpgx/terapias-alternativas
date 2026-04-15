@@ -9,6 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./alert-dialog";
+import "./ConfirmModal.css";
 
 export default function ConfirmModal({
   isOpen,
@@ -26,17 +27,21 @@ export default function ConfirmModal({
         if (!open) onCancel();
       }}
     >
-      <AlertDialogContent className="max-w-md">
+      <AlertDialogContent className="confirm-modal">
         <AlertDialogHeader>
-          <div className="mb-2 flex justify-center sm:justify-start">
-            <AlertTriangle size={42} color="var(--error)" />
+          <div className="confirm-icon-wrapper">
+            <AlertTriangle size={32} />
           </div>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{message}</AlertDialogDescription>
+          <AlertDialogTitle className="confirm-title">{title}</AlertDialogTitle>
+          <AlertDialogDescription className="confirm-description">
+            {message}
+          </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>{cancelText}</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>
+        <AlertDialogFooter className="confirm-footer">
+          <AlertDialogCancel className="confirm-cancel">
+            {cancelText}
+          </AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm} className="confirm-action">
             {confirmText}
           </AlertDialogAction>
         </AlertDialogFooter>
