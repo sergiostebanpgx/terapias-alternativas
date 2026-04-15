@@ -1,15 +1,55 @@
+/* ===== CONFIRM MODAL - DARK MODE ===== */
+
+.confirm-modal {
+  text-align: center;
+}
+
 .confirm-icon-wrapper {
-  background: rgba(239, 68, 68, 0.1);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-full);
+  color: var(--error);
 }
 
-.modal-content.glass-panel {
-  border-top: 2px solid rgba(239, 68, 68, 0.3);
+.confirm-title {
+  text-align: center !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+}
+
+.confirm-description {
+  text-align: center !important;
+  color: var(--text-muted) !important;
+  line-height: 1.6;
+}
+
+.confirm-footer {
+  margin-top: var(--space-md);
+  gap: var(--space-sm) !important;
+}
+
+.confirm-cancel {
+  flex: 1;
+}
+
+.confirm-action {
+  flex: 1;
+}
+
+@media (max-width: 639px) {
+  .confirm-footer {
+    flex-direction: column-reverse !important;
+  }
+  
+  .confirm-cancel,
+  .confirm-action {
+    width: 100%;
+  }
 }

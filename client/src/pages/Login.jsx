@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
-import './Login.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
+import { Leaf, Mail, Lock, ArrowRight } from "lucide-react";
+import "./Login.css";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,53 +22,92 @@ export default function Login() {
     setIsLoading(false);
 
     if (result.success) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
       setError(result.message);
     }
   };
 
   return (
-    <div className="login-container flex-center">
-      <div className="login-card glass-panel">
-        <div className="login-header">
-          <h2>Terapias Alternativas</h2>
-          <p>Bienvenido, inicie sesión para continuar</p>
+    <div className="login-page">
+      {/* Background decoration */}
+      <div className="login-bg" aria-hidden="true">
+        <div className="bg-gradient bg-gradient-1" />
+        <div className="bg-gradient bg-gradient-2" />
+      </div>
+
+      <div className="login-container">
+        {/* Logo */}
+        <div className="login-logo">
+          <div className="logo-icon">
+            <Leaf size={28} />
+          </div>
+          <span className="logo-text">Alternativas</span>
         </div>
 
-        {error && <div className="toast-error">{error}</div>}
-
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="email">Correo Electrónico</label>
-            <input
-              type="email"
-              id="email"
-              className="input-field"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="admin@centro.com"
-            />
+        {/* Card */}
+        <div className="login-card">
+          <div className="card-header">
+            <h1>Bienvenido</h1>
+            <p>Ingresa tus credenciales para continuar</p>
           </div>
 
-          <div className="input-group">
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              id="password"
-              className="input-field"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-            />
-          </div>
+          {error && (
+            <div className="error-message" role="alert">
+              {error}
+            </div>
+          )}
 
-          <button type="submit" className="btn-primary" disabled={isLoading} style={{ width: '100%', marginTop: '10px' }}>
-            {isLoading ? 'Iniciando...' : 'Iniciar Sesión'}
-          </button>
-        </form>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-field">
+              <label htmlFor="email">Correo Electronico</label>
+              <div className="input-container">
+                <Mail size={18} className="input-icon" />
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="admin@centro.com"
+                  autoComplete="email"
+                />
+              </div>
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="password">Contrasena</label>
+              <div className="input-container">
+                <Lock size={18} className="input-icon" />
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Tu contrasena"
+                  autoComplete="current-password"
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="submit-btn" disabled={isLoading}>
+              {isLoading ? (
+                <span className="loading-spinner" />
+              ) : (
+                <>
+                  Iniciar Sesion
+                  <ArrowRight size={18} />
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+
+        {/* Footer */}
+        <p className="login-footer">
+          Panel de gestion clinica
+        </p>
       </div>
     </div>
   );

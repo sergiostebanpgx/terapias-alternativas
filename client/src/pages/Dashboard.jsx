@@ -6,8 +6,9 @@ import {
   Calendar,
   Users,
   AlertTriangle,
-  Clock3,
-  Activity,
+  TrendingUp,
+  ArrowUpRight,
+  Package,
 } from "lucide-react";
 import "./Dashboard.css";
 
@@ -26,90 +27,112 @@ export default function Dashboard() {
   const toCurrency = (amount) =>
     `$${Number(amount || 0).toLocaleString("es-CO", { maximumFractionDigits: 0 })}`;
 
+  const currentDate = new Date().toLocaleDateString("es-CO", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
-    <div className="dashboard-wrapper">
-      <section className="dashboard-hero">
-        <div className="dashboard-greeting">
-          <h1>Hola, {user?.name?.split(" ")[0] || "Equipo"}</h1>
-          <p>Resumen diario de operación clínica.</p>
+    <div className="dashboard">
+      {/* Header */}
+      <header className="dashboard-header">
+        <div className="header-content">
+          <h1 className="greeting">
+            Hola, {user?.name?.split(" ")[0] || "Equipo"}
+          </h1>
+          <p className="subtitle">
+            Resumen de operaciones del dia
+          </p>
         </div>
-
-        <div className="dashboard-time">
-          <Clock3 size={16} />
-          <span>
-            {new Date().toLocaleDateString("es-CO", {
-              weekday: "long",
-              day: "numeric",
-              month: "long",
-            })}
-          </span>
+        <div className="header-date">
+          <Calendar size={16} />
+          <span>{currentDate}</span>
         </div>
-      </section>
+      </header>
 
+      {/* Stats Grid */}
       <section className="stats-grid">
-        <article className="glass-panel stat-card">
-          <div className="stat-label">
-            <Wallet size={16} />
-            Ingresos Hoy
-          </div>
-          <div className="stat-value value-secondary">
-            {toCurrency(dailyRevenue)}
-          </div>
-          <div className="stat-sub">Total recaudado en caja</div>
-        </article>
-
-        <article className="glass-panel stat-card">
-          <div className="stat-label">
-            <Calendar size={16} />
-            Citas para Hoy
-          </div>
-          <div className="stat-value value-primary">{dailyAppointments}</div>
-          <div className="stat-sub">Agenda del día</div>
-        </article>
-
-        <article className="glass-panel stat-card">
-          <div className="stat-label">
-            <Users size={16} />
-            Pacientes Nuevos
-          </div>
-          <div className="stat-value">{newPatients}</div>
-          <div className="stat-sub">Registros creados hoy</div>
-        </article>
-
-        <article className="glass-panel stat-card">
-          <div className="stat-label split-label">
-            <span>Stock Bajo</span>
-            <AlertTriangle
-              size={16}
-              className={lowStockItems > 0 ? "danger-icon" : "ok-icon"}
-            />
-          </div>
-          <div
-            className={`stat-value ${lowStockItems > 0 ? "value-danger" : "value-ok"}`}
-          >
-            {lowStockItems}
-          </div>
-          <div className="stat-sub">Productos por reponer</div>
-        </article>
-      </section>
-
-      <section className="dashboard-bottom">
-        <article className="glass-panel panel-card minimal-feed">
-          <div className="panel-header">
-            <h3>Movimientos Recientes</h3>
-            <span className="panel-badge badge-muted">
-              <Activity size={12} />
-              Caja
+        <article className="stat-card">
+          <div className="stat-header">
+            <div className="stat-icon icon-success">
+              <Wallet size={20} />
+            </div>
+            <span className="stat-trend positive">
+              <TrendingUp size={14} />
+              Hoy
             </span>
           </div>
+          <div className="stat-body">
+            <span className="stat-value success">{toCurrency(dailyRevenue)}</span>
+            <span className="stat-label">Ingresos del Dia</span>
+          </div>
+        </article>
 
+        <article className="stat-card">
+          <div className="stat-header">
+            <div className="stat-icon icon-primary">
+              <Calendar size={20} />
+            </div>
+            <span className="stat-trend neutral">Programadas</span>
+          </div>
+          <div className="stat-body">
+            <span className="stat-value primary">{dailyAppointments}</span>
+            <span className="stat-label">Citas para Hoy</span>
+          </div>
+        </article>
+
+        <article className="stat-card">
+          <div className="stat-header">
+            <div className="stat-icon icon-info">
+              <Users size={20} />
+            </div>
+            <span className="stat-trend neutral">Nuevos</span>
+          </div>
+          <div className="stat-body">
+            <span className="stat-value">{newPatients}</span>
+            <span className="stat-label">Pacientes Registrados</span>
+          </div>
+        </article>
+
+        <article className="stat-card">
+          <div className="stat-header">
+            <div className={`stat-icon ${lowStockItems > 0 ? "icon-danger" : "icon-success"}`}>
+              <Package size={20} />
+            </div>
+            {lowStockItems > 0 && (
+              <span className="stat-trend negative">
+                <AlertTriangle size={14} />
+                Alerta
+              </span>
+            )}
+          </div>
+          <div className="stat-body">
+            <span className={`stat-value ${lowStockItems > 0 ? "danger" : "success"}`}>
+              {lowStockItems}
+            </span>
+            <span className="stat-label">Productos Stock Bajo</span>
+          </div>
+        </article>
+      </section>
+
+      {/* Recent Activity */}
+      <section className="activity-section">
+        <div className="section-header">
+          <h2>Movimientos Recientes</h2>
+          <span className="section-badge">Ingresos de hoy</span>
+        </div>
+
+        <div className="activity-card">
           {!stats.recentPayments || stats.recentPayments.length === 0 ? (
-            <p className="empty-state">
-              No hay ingresos registrados el día de hoy.
-            </p>
+            <div className="empty-activity">
+              <Wallet size={32} />
+              <p>No hay ingresos registrados hoy</p>
+            </div>
           ) : (
-            <div>
-              {stats.recentPayments.map((payment) => {
+            <div className="activity-list">
+              {stats.recentPayments.map((payment, index) => {
                 const name = payment.patient_name || "Paciente";
                 const initials = name
                   .split(" ")
@@ -121,33 +144,31 @@ export default function Dashboard() {
 
                 return (
                   <div
-                    key={`${payment.transaction_date}-${name}-${payment.amount}`}
+                    key={`${payment.transaction_date}-${name}-${index}`}
                     className="activity-item"
                   >
-                    <div className="activity-avatar" aria-hidden="true">
+                    <div className="activity-avatar">
                       {initials || "PA"}
                     </div>
-                    <div className="activity-info">
-                      <p className="activity-name">{name}</p>
-                      <p className="activity-time">
+                    <div className="activity-details">
+                      <span className="activity-name">{name}</span>
+                      <span className="activity-time">
                         {new Date(payment.transaction_date).toLocaleTimeString(
                           "es-CO",
-                          {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          },
+                          { hour: "2-digit", minute: "2-digit" }
                         )}
-                      </p>
+                      </span>
                     </div>
-                    <p className="activity-amount">
-                      + {toCurrency(payment.amount)}
-                    </p>
+                    <div className="activity-amount">
+                      <span className="amount-value">+{toCurrency(payment.amount)}</span>
+                      <ArrowUpRight size={14} />
+                    </div>
                   </div>
                 );
               })}
             </div>
           )}
-        </article>
+        </div>
       </section>
     </div>
   );
